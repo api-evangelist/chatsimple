@@ -1,0 +1,81 @@
+generated: '2026-07-18'
+method: searched
+source: https://www.expertise.ai/pricing
+currency: USD
+notes: >-
+  Three product lines are priced separately: AI Agent (chatbot/sales agent),
+  Expertise Assistant (sales automation), and Booking. API access is included
+  on the Enterprise AI Agent tier. Prices captured verbatim from the public
+  pricing page on 2026-07-18.
+plans:
+- product: AI Agent
+  name: Free Preview
+  price: 0
+  interval: month
+  highlights:
+  - 1 AI Agent
+  - 10 conversations
+  - up to 50 training materials
+- product: AI Agent
+  name: Growth
+  price: 500
+  price_yearly: 400
+  interval: month
+  highlights:
+  - unlimited conversations
+  - up to 500 training materials
+  - HubSpot integration
+- product: AI Agent
+  name: Business
+  price: 1250
+  interval: month
+  highlights:
+  - Visitor Intelligence
+  - proactive live chat
+  - 2-way HubSpot sync
+  - Voice AI
+  - 3 Playbooks
+- product: AI Agent
+  name: Enterprise
+  price: null
+  interval: custom
+  highlights:
+  - custom AI Agents
+  - HubSpot + Salesforce
+  - SSO
+  - Marketo
+  - LeanData
+  - API access
+- product: Expertise Assistant
+  name: Free
+  price: 0
+  interval: month
+  highlights:
+  - 200 credits/day
+  - basic workflows
+  - 1 seat
+- product: Expertise Assistant
+  name: Pro
+  price: 40
+  interval: month
+  unit: per user
+  highlights:
+  - 5,000 credits/month + 200/day
+  - 30+ integrations
+- product: Expertise Assistant
+  name: Team & Scale
+  price: null
+  interval: custom
+  highlights:
+  - consolidated billing
+  - shared workflows
+  - admin controls
+- product: Booking
+  name: Free
+  price: 0
+  interval: month
+- product: Booking
+  name: Pro
+  price: 30
+  price_yearly: 24
+  interval: month

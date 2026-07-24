@@ -1,0 +1,40 @@
+generated: '2026-07-18'
+method: searched
+probe: true
+source: https://trust.expertise.ai/
+url: https://trust.expertise.ai/
+certifications:
+- SOC 2 Type 1
+- SOC 2 Type 2
+- SOC 3
+- GDPR
+- CCPA
+reports:
+- Network Diagram
+- Pentest Report
+- BCP/DRP
+legal:
+- Data Processing Agreement
+- Subprocessors
+- Cyber Insurance
+security_controls:
+- RS256 token-based authentication with automatic expiry
+- Secure HTTP-only cookies and short-lived session tokens
+- 60-second expiring presigned URLs for file access
+- HTTPS with HSTS and Content Security Policy (CSP)
+- Hashed API keys and HMAC webhook signatures
+- Vector database isolation per chatbot
+- AWS Secrets Manager for credential storage
+- Alignment with OWASP Top 10
+evidence:
+- source: https://trust.expertise.ai/
+  keywords:
+  - trust center
+  - soc 2 type 1
+  - soc 2 type 2
+  - soc 3
+- source: https://www.expertise.ai/security
+  keywords:
+  - gdpr
+  - ccpa
+  - aicpa soc

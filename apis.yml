@@ -1,7 +1,17 @@
 aid: chatsimple
 name: Chatsimple
-description: Chatsimple is a company surfaced as a portfolio company of 500-global and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Chatsimple (now operating as Expertise AI, expertise.ai) is an AI agent
+  platform for revenue and go-to-market teams. It builds no-code conversational
+  AI sales agents and chatbots that engage website visitors, qualify and capture
+  leads, book meetings, and answer questions from a trained knowledge base, plus
+  a Voice AI assistant and an "Expertise Assistant" library of 100+ pre-built
+  GTM plays that automate prospecting, pipeline management, and outreach. The
+  platform embeds on any website, integrates with CRM and communication tools
+  such as HubSpot, Salesforce, Slack, Zapier, Marketo, and LeanData, and offers
+  API access on its Enterprise tier. It is SOC 2 Type II, SOC 3, GDPR, and CCPA
+  aligned with a public trust center. Originally launched as chatsimple.ai, the
+  company rebranded to Expertise AI; chatsimple.ai now redirects to expertise.ai.
 url: https://raw.githubusercontent.com/api-evangelist/chatsimple/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,11 +19,33 @@ x-backed-by:
 - 500-global
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://www.expertise.ai/images/og-home-page.png
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
 tags:
 - Company
+- AI Agents
+- Conversational AI
+- Chatbot
+- Lead Generation
+- Sales Automation
+- CRM Integration
+- Voice AI
+- Go-To-Market
+- Customer Engagement
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -22,4 +54,35 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://chatsimple.ai
+  url: https://www.expertise.ai
+- type: Portal
+  url: https://my.expertise.ai
+- type: Documentation
+  url: https://docs.expertise.ai/
+- type: Blog
+  url: https://www.expertise.ai/blog
+- type: Pricing
+  url: https://www.expertise.ai/pricing
+- type: SignUp
+  url: https://my.expertise.ai?signup=true
+- type: Login
+  url: https://my.expertise.ai/?log_in=true
+- type: TermsOfService
+  url: https://www.expertise.ai/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.expertise.ai/privacy-policy
+- type: Support
+  url: https://www.expertise.ai/contact-us
+- type: TrustCenter
+  url: security/chatsimple-trust-center.yml
+- type: Compliance
+  url: https://trust.expertise.ai/
+- type: Plans
+  url: plans/chatsimple-plans.yml
+- type: DomainSecurity
+  url: security/chatsimple-domain-security.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
