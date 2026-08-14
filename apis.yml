@@ -34,7 +34,7 @@ accessModel:
 image: https://www.expertise.ai/images/og-home-page.png
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-18'
+modified: '2026-08-13'
 tags:
 - Company
 - AI Agents
@@ -46,7 +46,62 @@ tags:
 - Voice AI
 - Go-To-Market
 - Customer Engagement
-apis: []
+apis:
+- aid: chatsimple-zapier-leads-api
+  name: Expertise AI Zapier / Leads API
+  description: >-
+    The only publicly documented HTTP endpoints Chatsimple (now Expertise AI)
+    publishes. Documented on the Zapier integration page of docs.expertise.ai as
+    four operations under the base URL https://api.expertise.ai/v0/users: a
+    connect/authorize call (GET /zapier), webhook registration (POST
+    /zapier/subscribe with the callback in X-HOOKURL), webhook removal (DELETE
+    /zapier/unsubscribe), and retrieval of the most recent captured lead (GET
+    /zapier/get_leads). Every call carries an X-API-KEY header plus X-USER-ID and
+    X-CHATBOT-ID to scope it to one account and one agent. Lead payloads carry
+    created_on, name, email, phone_number and questions. No OpenAPI is published
+    for it, and on 2026-08-13 every documented path returned HTTP 404 to an
+    anonymous request while the host itself was healthy — recorded as published
+    but unverified.
+  humanURL: https://docs.expertise.ai/live/integrations/zapier
+  baseURL: https://api.expertise.ai/v0/users
+  tags:
+  - Lead Generation
+  - Webhooks
+  - Automation
+  - Chatbot
+  properties:
+  - type: Documentation
+    url: https://docs.expertise.ai/live/integrations/zapier
+  - type: APIReference
+    url: https://docs.expertise.ai/live/integrations/zapier
+  - type: Authentication
+    url: authentication/chatsimple-authentication.yml
+  - type: Webhooks
+    url: asyncapi/chatsimple-webhooks.yml
+- aid: chatsimple-mcp-server
+  name: Expertise AI MCP Server
+  description: >-
+    A remote Model Context Protocol server at https://api.expertise.ai/mcp,
+    found by direct probe of the API host root and documented nowhere on the
+    provider's site. It implements the MCP Streamable HTTP transport — a GET
+    returns HTTP 405 with {"error":"SSE stream not supported"} and a POST returns
+    well-formed JSON-RPC 2.0 — but every anonymous call, including tools/list,
+    returns HTTP 401 with JSON-RPC error -32001 Unauthorized, so the live tool
+    manifest and its input schemas are not publicly readable. The server
+    implements the RFC 8414 and RFC 9728 discovery routes and answers both with
+    {"error":"oauth_not_supported"}, so authentication is an API key rather than
+    OAuth. No tool list has been derived or invented.
+  humanURL: https://api.expertise.ai/mcp
+  baseURL: https://api.expertise.ai/mcp
+  tags:
+  - MCP
+  - AI Agents
+  - Agent Tools
+  properties:
+  - type: MCPServer
+    url: mcp/chatsimple-mcp.yml
+  - type: Authentication
+    url: authentication/chatsimple-authentication.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -81,8 +136,42 @@ common:
   url: plans/chatsimple-plans.yml
 - type: DomainSecurity
   url: security/chatsimple-domain-security.yml
+- type: APIReference
+  url: https://docs.expertise.ai/live/integrations/zapier
+- type: GettingStarted
+  url: https://docs.expertise.ai/getting-started/connect
+- type: GitHubOrganization
+  url: https://github.com/ChatSimple
+- type: Roadmap
+  url: https://www.expertise.ai/roadmap
+- type: ChangeLog
+  url: changelog/chatsimple-changelog.yml
+- type: MCPServer
+  url: mcp/chatsimple-mcp.yml
+- type: Authentication
+  url: authentication/chatsimple-authentication.yml
+- type: Conventions
+  url: conventions/chatsimple-conventions.yml
+- type: Webhooks
+  url: asyncapi/chatsimple-webhooks.yml
+- type: RateLimits
+  url: rate-limits/chatsimple-rate-limits.yml
+- type: Lifecycle
+  url: lifecycle/chatsimple-lifecycle.yml
+- type: Conformance
+  url: conformance/chatsimple-conformance.yml
+- type: Packages
+  url: packages/chatsimple-packages.yml
+- type: Components
+  url: components/chatsimple-components.yml
+- type: LLMsTxt
+  url: llms/chatsimple-llms.txt
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 12
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
+  note: >-
+    Round 2. Contract discovery on the API host root found a real remote MCP
+    server (auth-gated) and a real four-endpoint REST reference on the Zapier
+    docs page; no OpenAPI, no AsyncAPI, no agent card, no security.txt.
