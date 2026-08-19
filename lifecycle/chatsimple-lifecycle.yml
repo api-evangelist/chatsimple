@@ -1,0 +1,91 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.expertise.ai/live/integrations/zapier
+sources:
+- https://docs.expertise.ai/live/integrations/zapier
+- https://www.expertise.ai/changelog
+- https://www.expertise.ai/roadmap
+- https://www.expertise.ai/pricing
+versioning:
+  scheme: uri-path
+  current: v0
+  docs: https://docs.expertise.ai/live/integrations/zapier
+  evidence: >-
+    The published base URL is https://api.expertise.ai/v0/users. `v0` is the only
+    version token the company publishes for its HTTP surface, and it signals a
+    pre-1.0 contract. No version-negotiation header, no date-pinned version, no
+    version list and no migration guide exist.
+  policy_published: false
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: unknown
+  note: >-
+    NO deprecation policy of any kind is published, and no Sunset or Deprecation
+    (RFC 8594) response header could be observed because every documented
+    endpoint returns 404 to an anonymous caller. No Deprecation pointer is wired
+    in apis.yml — there is nothing to point at.
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No uptime SLA is published. The pricing page offers "Priority + SLA" support
+    on the Team & Scale tier and "Priority onboarding & SLAs" — those are support
+    response commitments sold to a tier, not a published availability target,
+    and they are not quantified publicly.
+status_page: null
+status_page_note: >-
+  NO status page. status.expertise.ai and status.chatsimple.ai do not resolve
+  (connection failure), and https://expertise.statuspage.io/ redirects to
+  statuspage.io's own marketing site rather than serving a tenant page. No
+  StatusPage pointer is wired in apis.yml, because the provider serves none.
+change_log: https://www.expertise.ai/changelog
+change_log_note: >-
+  Dated product changelog, most recent visible entry 2026-03-06. It tracks
+  product features and model upgrades, not API changes — see
+  changelog/chatsimple-changelog.yml.
+roadmap: https://www.expertise.ai/roadmap
+roadmap_note: >-
+  Public dated product roadmap with a "Request a Feature" submission path;
+  latest published item dated 2026-06-20.
+product_lifecycle:
+  rebrand:
+    from: Chatsimple (chatsimple.ai)
+    to: Expertise AI (expertise.ai)
+    evidence: >-
+      chatsimple.ai 301s to www.expertise.ai, docs.chatsimple.ai 301s to
+      docs.expertise.ai, and the company publishes a migration explainer at
+      https://www.expertise.ai/chatsimple. The GitHub organization
+      github.com/ChatSimple carries the display name "ExpertiseAI".
+    note: >-
+      The rename is only partly propagated in the developer surface: the browser
+      embed loader is still served from cdn.chatsimple.ai, the widget's global
+      JavaScript object is still window.chatsimpleWidget, and the Zapier
+      reference still refers to the vendor as "Chatsimple" in its prose.
+  legacy_docs:
+    note: >-
+      Old docs.chatsimple.ai deep links (e.g. /widget-specifics/widget-
+      customization, /unlock-full-power-of-chatsimple/configure-chatsimple-ai-nav)
+      redirect to the same path on docs.expertise.ai and then return 404 — the
+      redirect preserves the path but the pages no longer exist, so previously
+      indexed developer documentation is now dead.
+    evidence:
+    - url: https://docs.chatsimple.ai/widget-specifics/widget-customization
+      final_url: https://docs.expertise.ai/widget-specifics/widget-customization
+      http_status: 404
+deprecated_operations: []
+x-evidence:
+- fetched: '2026-08-13'
+  url: https://status.expertise.ai/
+  http_status: 0
+  note: DNS/connection failure — host does not resolve.
+- fetched: '2026-08-13'
+  url: https://expertise.statuspage.io/
+  http_status: 200
+  note: Redirects to www.statuspage.io; not a tenant status page.
+- fetched: '2026-08-13'
+  url: https://www.expertise.ai/changelog
+  http_status: 200
+- fetched: '2026-08-13'
+  url: https://www.expertise.ai/roadmap
+  http_status: 200

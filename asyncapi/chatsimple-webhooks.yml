@@ -1,0 +1,128 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.expertise.ai/live/integrations/zapier
+sources:
+- https://docs.expertise.ai/live/integrations/zapier
+- https://www.expertise.ai/pricing
+- https://www.expertise.ai/security
+spec_type: none
+spec_note: >-
+  NO AsyncAPI document is published. Probes of /asyncapi.yaml, /asyncapi.json and
+  the docs host returned nothing, and the GitHub organization has zero public
+  repositories. Nothing was fabricated — this file captures the webhook surface
+  the provider genuinely advertises and documents, and says plainly where the
+  event catalog stops.
+surface: webhooks
+advertised:
+  where: https://www.expertise.ai/pricing
+  claim: >-
+    "Webhook — Webhook integration to send event data to any endpoint." Listed
+    as a Business-tier feature on the public Expertise Live pricing page, and
+    carried into Enterprise.
+  tier: Business
+subscription_api:
+  base_url: https://api.expertise.ai/v0/users
+  docs: https://docs.expertise.ai/live/integrations/zapier
+  auth: X-API-KEY header plus X-USER-ID and X-CHATBOT-ID (see authentication/)
+  note: >-
+    The only publicly documented way to register a webhook is the Zapier
+    subscription trio below. The docs describe these as the endpoints Zapier
+    calls, but they are ordinary HTTP endpoints on the provider's own API host
+    and are documented with full request/response shapes.
+  operations:
+  - name: subscribe
+    method: POST
+    path: /zapier/subscribe
+    url: https://api.expertise.ai/v0/users/zapier/subscribe
+    headers:
+    - X-API-KEY
+    - X-USER-ID
+    - X-CHATBOT-ID
+    - X-HOOKURL
+    description: >-
+      Registers a callback URL (X-HOOKURL) to receive lead events for one
+      chatbot. Returns the current leads list.
+  - name: unsubscribe
+    method: DELETE
+    path: /zapier/unsubscribe
+    url: https://api.expertise.ai/v0/users/zapier/unsubscribe
+    headers:
+    - X-API-KEY
+    - X-USER-ID
+    - X-CHATBOT-ID
+    description: >-
+      Removes the registration. Returns the integration record
+      (user_id, chatbot_id, integration_id, integration_type "ZAPIER", api_key,
+      target_url).
+  - name: get_leads
+    method: GET
+    path: /zapier/get_leads
+    url: https://api.expertise.ai/v0/users/zapier/get_leads
+    headers:
+    - X-API-KEY
+    - X-USER-ID
+    - X-CHATBOT-ID
+    description: >-
+      Polled when the webhook fires; returns the most recent lead.
+  - name: connect
+    method: GET
+    path: /zapier
+    url: https://api.expertise.ai/v0/users/zapier
+    headers:
+    - X-HTML-SNIPPET
+    - X-API-KEY
+    description: >-
+      Connection/authorization call. Returns {status, user_id, chatbot_id}
+      with HTTP 200 on success.
+events:
+- name: lead.created
+  name_note: >-
+    NAME NOT PUBLISHED. The provider documents the payload but never names the
+    event; this label is a description, not a provider string. Do not treat it
+    as a callable event type.
+  trigger: A new lead is captured by an Expertise Live agent.
+  delivery: HTTP callback to the registered X-HOOKURL, then poll get_leads.
+  payload_fields:
+  - created_on
+  - name
+  - email
+  - phone_number
+  - questions
+  payload_source: >-
+    Verbatim from the documented get_leads / subscribe response bodies on
+    https://docs.expertise.ai/live/integrations/zapier
+security:
+  signing: >-
+    No webhook signing scheme is published for OUTBOUND Expertise AI webhooks.
+    The security page states that "Webhook signature checks, verification tokens,
+    and event deduplication protect supported channels where the provider offers
+    them" — that sentence is about INBOUND events from connected third parties
+    (Slack, HubSpot, WhatsApp), not about verifying Expertise AI's own callbacks.
+  source: https://www.expertise.ai/security
+  trust_center_claim: >-
+    trust.expertise.ai lists "HMAC webhook signatures" among its security
+    controls, but no verification procedure, header name or secret-rotation
+    guidance is published for integrators.
+x-evidence:
+- fetched: '2026-08-13'
+  url: https://docs.expertise.ai/live/integrations/zapier
+  http_status: 200
+- fetched: '2026-08-13'
+  url: https://www.expertise.ai/pricing
+  http_status: 200
+- fetched: '2026-08-13'
+  url: https://api.expertise.ai/v0/users/zapier
+  http_status: 404
+  note: >-
+    IMPORTANT NEGATIVE RESULT. Every path under the documented base URL returns
+    a Flask 404 to an anonymous GET — /v0/users, /v0/users/zapier and
+    /v0/users/zapier/get_leads all 404, while /health returns 200 and /mcp
+    returns 405/401. The route may be gated ahead of routing, or the published
+    base URL may be stale after the chatsimple.ai -> expertise.ai rename. Either
+    way the documented base URL could not be confirmed live and is recorded as
+    published-but-unverified.
+gaps:
+- No AsyncAPI document.
+- No named event types and no event catalog beyond the single lead payload.
+- No retry, ordering or delivery-guarantee policy published.
+- No signature-verification documentation for outbound webhooks.

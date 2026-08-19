@@ -1,8 +1,16 @@
-generated: '2026-07-18'
+generated: '2026-08-13'
 method: searched
 probe: true
 source: https://trust.expertise.ai/
 url: https://trust.expertise.ai/
+security_page: https://www.expertise.ai/security
+review_request: >-
+  The security page offers a "Start a security review" path and a "View Trust
+  Center" link. There is NO vulnerability-disclosure or bug-bounty program: no
+  security.txt on any host, no security@ address, no responsible-disclosure
+  page, and no HackerOne/Bugcrowd/Intigriti listing. security/
+  chatsimple-vulnerability-disclosure.yml is therefore deliberately not written
+  and no `Security` pointer is wired in apis.yml.
 certifications:
 - SOC 2 Type 1
 - SOC 2 Type 2
@@ -38,3 +46,35 @@ evidence:
   - gdpr
   - ccpa
   - aicpa soc
+- source: https://www.expertise.ai/security
+  fetched: '2026-08-13'
+  http_status: 200
+  keywords:
+  - soc 2 type ii
+  - soc 3
+  - independent penetration test
+  - dpa available
+- source: https://www.expertise.ai/changelog
+  fetched: '2026-08-13'
+  http_status: 200
+  keywords:
+  - 'SOC 2 Type II Compliance Achieved (changelog entry dated 2025-07-29)'
+product_security_model:
+  source: https://www.expertise.ai/security
+  fetched: '2026-08-13'
+  note: >-
+    The security page splits controls by product because the two threat models
+    differ. Captured verbatim in summary because it is unusually specific for
+    this size of company and it is the provider's own published claim.
+  expertise_live:
+  - Tenant-scoped knowledge in an isolated vector namespace per chatbot/customer
+  - Untrusted-input boundaries between visitor messages, retrieved content and system instructions
+  - Input validation, rate limiting, spam controls and SSRF protections; output sanitization and embed restrictions
+  - Retrieval/response grounding controls
+  - Webhook signature checks, verification tokens and event deduplication on supported inbound channels
+  expertise_assistant:
+  - Skill-bundle screening of instructions, metadata, accessory files and declared connectors
+  - User-scoped microVM sandboxes with runtime, filesystem and process boundaries
+  - Backend-held connector credentials kept out of prompts; sandbox receives only scoped session credentials
+  - Deterministic server-side connector/method/route authorization independent of model output
+  - Human approval required for classified writes; unknown write behaviour fails closed to review

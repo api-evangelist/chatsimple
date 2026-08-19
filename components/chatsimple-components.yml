@@ -1,0 +1,106 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.expertise.ai/miscellaneous/javascript-api
+sources:
+- https://docs.expertise.ai/miscellaneous/javascript-api
+- https://docs.expertise.ai/live/embedding/general-websites
+- https://docs.expertise.ai/live/embedding/iframe-customizations
+- https://cdn.chatsimple.ai/chat-bot-loader.js
+note: >-
+  Expertise Live (the product formerly sold as the Chatsimple chatbot) is
+  distributed as a client-side embeddable agent, and that embed is the company's
+  most complete public developer surface. The loader defines a real custom
+  element and exposes a documented browser JavaScript API. Attribute names below
+  were read from the shipped loader source at cdn.chatsimple.ai; methods were
+  read from the published JavaScript API reference. Nothing here is inferred.
+families:
+- family: Expertise Live web component
+  kind: custom-element
+  element: <chat-bot>
+  loader: https://cdn.chatsimple.ai/chat-bot-loader.js
+  runtime_bundle: https://cdn.expertise.ai/assets-wc/index-cab4d267.js
+  runtime_styles: https://cdn.expertise.ai/assets-wc/index-4348e0ff.css
+  rendering: shadow DOM (mode open), lazy-loaded on requestIdleCallback/window load
+  install: >-
+    The customer-specific snippet is generated in the dashboard under
+    "Add to Website" and pasted before the closing </body> tag. The docs cover
+    plain HTML, React (public/index.html) and Next.js (pages/_document.js), plus
+    WordPress, Wix, Webflow, GoDaddy, Google Sites, Google Tag Manager and
+    HubSpot CMS.
+  required_attributes:
+  - platform_id
+  - user_id
+  - chatbot_id
+  optional_attributes:
+  - region
+  - is_au
+  - is_open
+  - is_left
+  - is_full_screen
+  - is_agreed
+  - is_shareable
+  - is_on_website
+  - agent_avatar_url
+  - show_leave_message
+  - show_popup_on_mobile
+  - show_cta_buttons
+  - hide_profile
+  - white_label
+  - has_copilot
+  - one_moment
+  - prompt_version
+  - analysis_mode
+  - livechat_token
+  - custom_express_questions
+  - chatsimple_demo_page
+  - chatsimple_share_page
+  - bottom_offset
+  - right_offset
+  - left_offset
+- family: iFrame block embed
+  kind: iframe
+  docs: https://docs.expertise.ai/live/embedding/iframe-customizations
+  note: >-
+    Alternative embed that renders the chat as an inline block element. The
+    dashboard emits the iframe snippet ("Embed Using" -> "iFrame"); the docs
+    document styling via standard HTML/CSS (height, width, border,
+    border-radius, box-shadow, margin, opacity) rather than component props.
+javascript_api:
+  docs: https://docs.expertise.ai/miscellaneous/javascript-api
+  globals:
+  - object: window.expertiseAi
+    product: AI Nav
+  - object: window.chatsimpleWidget
+    product: classic widget
+  note: Both globals expose the identical method set.
+  methods:
+  - name: sendMessage
+    signature: sendMessage(message)
+    params:
+    - name: message
+      type: string
+      description: The text sent to the AI as the user.
+    description: >-
+      Opens the chat window and sends the specified message as the user; the
+      primary way to start a conversation from page context (buttons, help
+      links, search bars).
+  - name: restart
+    signature: restart()
+    description: Clears the conversation history and starts a fresh session.
+  - name: show
+    signature: show()
+    description: Makes the agent visible if it was previously hidden.
+  - name: hide
+    signature: hide()
+    description: Hides the agent from the screen.
+  internal_globals:
+  - window.CHATSIMPLE_WIDGET.initializeChatbot
+  - window.CHATSIMPLE_WIDGET.isInitialized
+  internal_globals_note: >-
+    Observed in the shipped loader source but NOT documented by the provider —
+    recorded as observed runtime detail, not as a supported contract.
+gaps:
+- The embed snippet is only obtainable from the authenticated dashboard, so the
+  concrete platform_id/user_id/chatbot_id values cannot be published here.
+- The loader URL is unpinned (no version in the path) and the runtime bundle is
+  content-hashed behind it, so an integrator cannot pin or diff a version.

@@ -1,0 +1,129 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.expertise.ai/changelog
+url: https://www.expertise.ai/changelog
+scheme: dated-product-changelog
+current_version: null
+current_version_note: >-
+  The changelog is a dated product feed with no release numbering and no API
+  version tags. The only version token the company publishes anywhere is the
+  `v0` path segment in the documented API base URL
+  (https://api.expertise.ai/v0/users); no changelog entry references it.
+api_relevant: false
+api_relevant_note: >-
+  Nothing in the visible window documents an API, endpoint, webhook or SDK
+  change. Every entry is a product/feature or model-upgrade announcement, so
+  this changelog cannot be used to track breaking changes to the HTTP surface.
+entry_count_visible: 25
+latest_entry_date: '2026-03-06'
+entries:
+- date: '2026-03-06'
+  title: GPT 5.4 now live on Expertise AI!
+  type: addition
+  breaking: false
+  highlights: Underlying model upgraded; sharper reasoning and faster responses.
+- date: '2026-02-26'
+  title: Image controls for Microsites
+  type: addition
+  breaking: false
+  highlights: >-
+    Review, enable/disable and re-describe scraped website images used on a
+    microsite; Debug Mode shows which images inform responses.
+- date: '2026-02-18'
+  title: Automatic Weekly Retraining now live!
+  type: addition
+  breaking: false
+  highlights: Agents retrain on all connected training materials weekly, in the background.
+- date: '2026-02-11'
+  title: Introducing Conversation URL Tracking
+  type: addition
+  breaking: false
+  highlights: >-
+    Conversation view now records the page a visitor was on when a conversation
+    started and the URL associated with each message.
+- date: '2026-01-14'
+  title: 'Expertise AI + HubSpot: Capture Contacts, Build Trust, Convert Faster'
+  type: addition
+  breaking: false
+  highlights: HubSpot CRM capture/qualification walkthrough for the chatbot.
+- date: '2026-01-07'
+  title: Introducing Analytics Dashboard 2.0
+  type: change
+  breaking: false
+  highlights: Tab-based navigation across metrics.
+- date: '2025-12-17'
+  title: Gemini 3 Flash now live on Expertise AI!
+  type: addition
+  breaking: false
+- date: '2025-12-12'
+  title: GPT 5.2 now live on Expertise AI!
+  type: addition
+  breaking: false
+- date: '2025-12-04'
+  title: 'Voice AI 2.0: Faster, More Natural Conversations'
+  type: change
+  breaking: false
+  highlights: Improved interruption handling and connection reliability.
+- date: '2025-11-13'
+  title: GPT 5.1 now live on Expertise AI!
+  type: addition
+  breaking: false
+- date: '2025-10-29'
+  title: Get real-time lead information on Slack!
+  type: addition
+  breaking: false
+  highlights: Slack alerts carrying ICP score, AI reasoning and full lead details.
+- date: '2025-10-24'
+  title: Introducing Expertise Booking!
+  type: addition
+  breaking: false
+  highlights: AI-native calendar scheduling product.
+- date: '2025-10-01'
+  title: WhatsApp Business Integration now live on Expertise AI!
+  type: addition
+  breaking: false
+  highlights: >-
+    WhatsApp Business Platform integration plus a QR-based lightweight setup.
+- date: '2025-09-29'
+  title: Claude 4.5 Sonnet now live on Expertise AI!
+  type: addition
+  breaking: false
+- date: '2025-09-24'
+  title: Microsites now live on Expertise AI!
+  type: addition
+  breaking: false
+- date: '2025-08-07'
+  title: GPT-5 now live on Expertise!
+  type: addition
+  breaking: false
+- date: '2025-07-29'
+  title: SOC 2 Type II Compliance Achieved
+  type: compliance
+  breaking: false
+  highlights: SOC 2 Type II attestation announced; corroborates security/chatsimple-trust-center.yml.
+- date: '2025-07-23'
+  title: Playbook now live on Expertise!
+  type: addition
+  breaking: false
+  highlights: Plain-language conversational playbooks with an @tool vocabulary.
+- date: '2025-07-16'
+  title: Visitor Identification now live on Expertise!
+  type: addition
+  breaking: false
+- date: '2025-07-07'
+  title: AI Engagement now live on Expertise!
+  type: addition
+  breaking: false
+related:
+  roadmap: https://www.expertise.ai/roadmap
+  roadmap_note: >-
+    A dated forward-looking roadmap is published alongside the changelog, with
+    entries out to 2026-06-20 (Advanced Analytics Dashboard, Voice AI
+    Conversations 2.0, Training materials 2.0) and a "Request a Feature" path.
+x-evidence:
+- fetched: '2026-08-13'
+  url: https://www.expertise.ai/changelog
+  http_status: 200
+- fetched: '2026-08-13'
+  url: https://www.expertise.ai/roadmap
+  http_status: 200

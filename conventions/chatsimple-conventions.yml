@@ -1,0 +1,112 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.expertise.ai/live/integrations/zapier
+sources:
+- https://docs.expertise.ai/live/integrations/zapier
+- https://docs.expertise.ai/miscellaneous/javascript-api
+- https://api.expertise.ai/mcp
+note: >-
+  DERIVED FROM DOCS AND LIVE PROBES, NOT FROM A SPEC — the provider publishes no
+  OpenAPI. This file records only what the published Zapier reference states and
+  what the live API host actually returned. Where a convention is simply absent,
+  it is recorded as absent rather than assumed.
+authentication:
+  style: api-key-header
+  header: X-API-KEY
+  tenancy_headers:
+  - X-USER-ID
+  - X-CHATBOT-ID
+  detail: authentication/chatsimple-authentication.yml
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    NO idempotency contract. No Idempotency-Key header, no request-id-based
+    replay protection, and no retry-safety guidance appears anywhere in the
+    documentation. Of the four documented operations, POST /zapier/subscribe and
+    DELETE /zapier/unsubscribe are the writes, and neither documents what happens
+    on a retry. NO `Idempotency` pointer is wired in apis.yml — emitting one
+    would assert a contract this provider does not have.
+pagination:
+  supported: false
+  note: >-
+    None documented. GET /zapier/get_leads is specified as returning "the most
+    recent lead" (a single object) and the subscribe response returns a mapped
+    leads list with no cursor, offset, limit or total field. There is no way to
+    page a lead history through the public surface.
+field_expansion:
+  supported: false
+metadata:
+  supported: false
+request_tracing:
+  request_id_header: null
+  note: >-
+    No correlation or request-id header is documented, and none was returned on
+    a live response from api.expertise.ai. An integrator has no handle to quote
+    in a support ticket.
+versioning:
+  scheme: uri-path
+  current: v0
+  detail: lifecycle/chatsimple-lifecycle.yml
+content_negotiation:
+  request_headers:
+  - 'Content-Type: application/json'
+  - 'Accept: application/json'
+  note: Both are set explicitly on every documented request example.
+error_envelope:
+  rest:
+    format: none
+    rfc9457: false
+    note: >-
+      No error catalog, no error codes and no error schema are published for the
+      REST surface. The docs show only success shapes (each documented operation
+      ends with "A successful call will ..."). Live anonymous requests to the
+      documented paths return the default Werkzeug/Flask HTML 404 body
+      (<!doctype html><title>404 Not Found</title>), i.e. an HTML error page from
+      a JSON API. errors/ was NOT written for this provider because there is
+      nothing real to catalog.
+  mcp:
+    format: jsonrpc-2.0
+    observed: '{"error":{"code":-32001,"message":"Unauthorized"},"id":null,"jsonrpc":"2.0"}'
+    note: >-
+      The MCP endpoint returns well-formed JSON-RPC 2.0 errors. Code -32001 is a
+      server-defined (implementation-specific) code, not a JSON-RPC reserved one.
+rate_limit_signaling:
+  headers: []
+  detail: rate-limits/chatsimple-rate-limits.yml
+  note: No rate-limit headers observed; no limits published.
+security_headers:
+  observed_on: https://api.expertise.ai
+  headers:
+  - strict-transport-security: max-age=31536000; includeSubDomains
+  - content-security-policy: default-src 'self'
+  - x-frame-options: SAMEORIGIN
+  - x-content-type-options: nosniff
+  - referrer-policy: strict-origin-when-cross-origin
+  - cache-control: no-store, no-cache, must-revalidate, max-age=0
+  note: >-
+    The API host sets a complete security header set on every response, including
+    404s — a genuinely good posture, and the strongest machine-observable signal
+    on this surface.
+cors:
+  observed: >-
+    GET https://api.expertise.ai/mcp responded with
+    access-control-allow-origin: * ; GET https://api.expertise.ai/health
+    responded with access-control-allow-origin: https://ai.skrivanek.pl and
+    vary: Origin on a request that sent NO Origin header. The second response is
+    an allow-list echo cached for a different tenant's origin; it is recorded as
+    observed behaviour, not characterised further.
+  fetched: '2026-08-13'
+client_side:
+  note: >-
+    The browser embed is the surface most integrators actually touch. Its
+    conventions (custom element attributes, the window.expertiseAi /
+    window.chatsimpleWidget method set) are captured in
+    components/chatsimple-components.yml.
+cross_links:
+  authentication: authentication/chatsimple-authentication.yml
+  lifecycle: lifecycle/chatsimple-lifecycle.yml
+  rate_limits: rate-limits/chatsimple-rate-limits.yml
+  webhooks: asyncapi/chatsimple-webhooks.yml
+  components: components/chatsimple-components.yml
+  mcp: mcp/chatsimple-mcp.yml

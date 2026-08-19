@@ -1,0 +1,148 @@
+generated: '2026-08-13'
+method: probed
+source: live GET of /.well-known/* on every Chatsimple / Expertise AI host
+summary:
+  documents_found: 0
+  note: >-
+    NO well-known document is served on any host. Two of the five hosts
+    (app.expertise.ai and my.expertise.ai) are single-page applications whose
+    catch-all route answers HTTP 200 with the same ~18KB HTML app shell for
+    EVERY /.well-known/* path — that is a soft-200, not a document, and it is
+    recorded here as a miss. No WellKnown or SecurityTxt pointer is emitted in
+    apis.yml, because none of these paths returns a real document.
+  soft_200_hosts:
+  - app.expertise.ai
+  - my.expertise.ai
+hosts:
+- host: https://api.expertise.ai
+  role: API host (Zapier REST endpoints + MCP endpoint)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+    body: '{"error": "oauth_not_supported"}'
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    body: '{"error": "oauth_not_supported"}'
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+    body: '{"error": "oauth_not_supported"}'
+  - path: /.well-known/oauth-protected-resource/mcp
+    status: 404
+    body: '{"error": "oauth_not_supported"}'
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/mcp.json
+    status: 404
+  note: >-
+    This host implements the OAuth/OIDC discovery routes but answers them with
+    an explicit machine-readable refusal ({"error":"oauth_not_supported"})
+    rather than metadata. That is a deliberate negative answer, captured here
+    as evidence for authentication/ and conformance/.
+- host: https://www.expertise.ai
+  role: marketing site
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://docs.expertise.ai
+  role: documentation host (Mintlify)
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://app.expertise.ai
+  role: application (SPA)
+  soft_200: true
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    result: miss
+    content_type: text/html
+    note: SPA catch-all returned the app shell, not a document.
+  - path: /.well-known/openid-configuration
+    status: 200
+    result: miss
+    content_type: text/html
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    result: miss
+    content_type: text/html
+  - path: /.well-known/api-catalog
+    status: 200
+    result: miss
+    content_type: text/html
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    result: miss
+    content_type: text/html
+  - path: /.well-known/agent-card.json
+    status: 200
+    result: miss
+    content_type: text/html
+  - path: /.well-known/agent.json
+    status: 200
+    result: miss
+    content_type: text/html
+- host: https://my.expertise.ai
+  role: customer portal (SPA)
+  soft_200: true
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    result: miss
+    content_type: text/html
+    note: SPA catch-all returned the app shell, not a document.
+  - path: /.well-known/openid-configuration
+    status: 200
+    result: miss
+    content_type: text/html
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    result: miss
+    content_type: text/html
+  - path: /.well-known/api-catalog
+    status: 200
+    result: miss
+    content_type: text/html
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    result: miss
+    content_type: text/html
+  - path: /.well-known/agent-card.json
+    status: 200
+    result: miss
+    content_type: text/html
+  - path: /.well-known/agent.json
+    status: 200
+    result: miss
+    content_type: text/html

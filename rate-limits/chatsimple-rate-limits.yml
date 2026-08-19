@@ -1,0 +1,47 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.expertise.ai/security
+sources:
+- https://www.expertise.ai/security
+- https://www.expertise.ai/pricing
+- https://docs.expertise.ai/live/integrations/zapier
+limit_count: 0
+limits: []
+note: >-
+  NO published rate limits. Chatsimple / Expertise AI states on its security page
+  that "input validation, rate limiting, spam controls, and SSRF protections
+  reduce common abuse paths", so rate limiting is confirmed to exist as a
+  control, but no number, window, scope, burst allowance or exhaustion status
+  code is published anywhere on the marketing site, the pricing page or the
+  documentation. An integrator cannot plan against it. limit_count: 0 is an
+  honest zero, not an unchecked field.
+headers:
+  observed: []
+  note: >-
+    No RateLimit-*, X-RateLimit-* or Retry-After header was returned by
+    api.expertise.ai on an anonymous request. The full response header set from
+    GET https://api.expertise.ai/health on 2026-08-13 was: server, date,
+    content-type, content-length, content-security-policy, x-frame-options,
+    x-content-type-options, referrer-policy, strict-transport-security,
+    cache-control, pragma, access-control-allow-origin, vary, via. There is no
+    runtime rate-limit signal for an agent to read.
+quota_model:
+  note: >-
+    What the provider DOES meter publicly is consumption credits, not API calls.
+    The Expertise Assistant plans publish credit allowances (Free: 200
+    credits/day; Pro: 5,000 credits/month plus 200/day; Team & Scale: custom
+    credit pool) and the AI Agent plans publish conversation and
+    training-material caps (Free Preview: 10 conversations, up to 50 training
+    materials; Growth: unlimited conversations, up to 500 training materials).
+    These are commercial quotas captured in plans/chatsimple-plans.yml, not
+    per-endpoint HTTP rate limits, and are recorded here only so the two are not
+    confused.
+  source: https://www.expertise.ai/pricing
+x-evidence:
+- fetched: '2026-08-13'
+  url: https://www.expertise.ai/security
+  http_status: 200
+- fetched: '2026-08-13'
+  url: https://api.expertise.ai/health
+  http_status: 200
+  result: no rate-limit response headers

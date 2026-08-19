@@ -1,0 +1,86 @@
+generated: '2026-08-13'
+method: probed
+source: https://api.expertise.ai/mcp
+status: published
+note: >-
+  Chatsimple now operates as Expertise AI (expertise.ai); chatsimple.ai
+  redirects to expertise.ai and docs.chatsimple.ai redirects to
+  docs.expertise.ai, so every host probed here is an expertise.ai host owned by
+  the same company. The MCP endpoint was found by direct probe of the API host
+  root — it is NOT documented anywhere on docs.expertise.ai or the marketing
+  site. A GET returns 405 with {"error":"SSE stream not supported"} and a POST
+  of any JSON-RPC method returns a well-formed JSON-RPC error, which is how the
+  server was confirmed to be a real MCP (Streamable HTTP) transport rather than
+  a catch-all route.
+server:
+  name: expertise-ai
+  transport: http
+  url: https://api.expertise.ai/mcp
+deployment:
+  mode: remote
+  endpoint: https://api.expertise.ai/mcp
+  auth: api-key
+  verified: probed
+  auth_note: >-
+    Anonymous initialize and tools/list both return JSON-RPC error -32001
+    "Unauthorized" with HTTP 401 and no WWW-Authenticate header. The RFC 9728 /
+    RFC 8414 discovery routes are implemented and answer explicitly:
+    GET /.well-known/oauth-protected-resource/mcp and
+    /.well-known/oauth-authorization-server/mcp both return HTTP 404 with the
+    JSON body {"error":"oauth_not_supported"}. The server therefore does not
+    speak OAuth; the only documented credential on this API host is the
+    X-API-KEY header used by the published Zapier endpoints, so auth is
+    recorded as api-key.
+tools: []
+tools_note: >-
+  The live tool set is auth-gated: tools/list returns 401 before the tool
+  manifest is emitted. No published tool list exists to fall back on — there is
+  no llms.txt on the docs host (advertised at /llms.txt but 404) and the MCP
+  server is not mentioned in the documentation. Input schemas require
+  authenticated introspection. NOT DERIVED: the provider publishes no OpenAPI,
+  so there are no operations to derive candidate tools from, and none were
+  invented.
+x-evidence:
+- fetched: '2026-08-13'
+  url: https://api.expertise.ai/mcp
+  method: GET
+  http_status: 405
+  content_type: application/json
+  body: '{"error": "SSE stream not supported"}'
+- fetched: '2026-08-13'
+  url: https://api.expertise.ai/mcp
+  method: POST
+  rpc_method: initialize
+  http_status: 401
+  content_type: application/json
+  body: '{"error":{"code":-32001,"message":"Unauthorized"},"id":null,"jsonrpc":"2.0"}'
+- fetched: '2026-08-13'
+  url: https://api.expertise.ai/mcp
+  method: POST
+  rpc_method: tools/list
+  http_status: 401
+  content_type: application/json
+  body: '{"error":{"code":-32001,"message":"Unauthorized"},"id":null,"jsonrpc":"2.0"}'
+- fetched: '2026-08-13'
+  url: https://api.expertise.ai/.well-known/oauth-protected-resource/mcp
+  http_status: 404
+  content_type: application/json
+  body: '{"error": "oauth_not_supported"}'
+- fetched: '2026-08-13'
+  url: https://api.expertise.ai/.well-known/oauth-authorization-server/mcp
+  http_status: 404
+  content_type: application/json
+  body: '{"error": "oauth_not_supported"}'
+negative_probes:
+- url: https://api.expertise.ai/sse
+  http_status: 404
+- url: https://api.expertise.ai/mcp/sse
+  http_status: 404
+- url: https://api.expertise.ai/v1/mcp
+  http_status: 404
+- url: https://api.expertise.ai/api/mcp
+  http_status: 404
+- url: https://api.expertise.ai/.well-known/mcp.json
+  http_status: 404
+- url: https://mcp.expertise.ai/
+  http_status: 404

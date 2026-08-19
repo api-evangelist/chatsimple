@@ -1,0 +1,64 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  Registry search across npm, PyPI, RubyGems, crates.io, NuGet, Maven Central,
+  pkg.go.dev and Packagist, plus the provider docs and CDN.
+summary:
+  package_count: 1
+  official_count: 1
+  server_sdk_count: 0
+  note: >-
+    Chatsimple / Expertise AI publishes NO server-side client library in any
+    package registry. The one first-party distributable is the browser embed
+    loader for the Expertise Live web component, served straight from the
+    company CDN with no registry entry and no version in the URL. Because there
+    is no API client SDK, no `SDKs` pointer is wired in apis.yml — only
+    `Packages` — so the sdk_count checks are correctly left unscored rather
+    than credited to a widget loader.
+packages:
+- language: javascript
+  registry: cdn
+  name: chat-bot-loader.js
+  url: https://cdn.chatsimple.ai/chat-bot-loader.js
+  install: <script src="https://cdn.chatsimple.ai/chat-bot-loader.js"></script>
+  official: true
+  kind: browser-embed-loader
+  version: null
+  published: null
+  note: >-
+    CDN-distributed, so there is no registry metadata endpoint to query. The URL
+    is UNPINNED — it carries no version segment and always floats to whatever
+    the CDN currently serves — so a consumer cannot tell which build they are
+    getting either. That is the finding, not a gap in this probe. The loader it
+    returns today is a 4,951-byte minified bundle that defines the <chat-bot>
+    custom element and then pulls a content-hashed runtime from
+    https://cdn.expertise.ai/assets-wc/index-cab4d267.js (the hash is the only
+    version signal available, and it is not published anywhere).
+  x-evidence:
+    fetched: '2026-08-13'
+    url: https://cdn.chatsimple.ai/chat-bot-loader.js
+    http_status: 200
+    content_type: text/javascript
+    size_bytes: 4951
+registry_probes:
+- registry: npm
+  query: chatsimple
+  result: no first-party package
+  status: 200
+- registry: npm
+  query: expertise-ai
+  result: no first-party package (only unrelated AI-SDK packages)
+  status: 200
+- registry: pypi
+  package: chatsimple
+  status: 404
+- registry: pypi
+  package: expertise-ai
+  status: 404
+- registry: github
+  org: https://github.com/ChatSimple
+  status: 200
+  result: >-
+    Organization exists and is owned by the company (display name "ExpertiseAI"),
+    but it has 0 public repositories, so there is no source-distributed library
+    either.

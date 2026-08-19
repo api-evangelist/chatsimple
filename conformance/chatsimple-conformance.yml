@@ -1,0 +1,146 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  Provider trust center, security page and changelog, plus live protocol probes
+  of api.expertise.ai.
+sources:
+- https://trust.expertise.ai/
+- https://www.expertise.ai/security
+- https://www.expertise.ai/changelog
+- https://api.expertise.ai/mcp
+standards:
+- id: soc2-type-2
+  conforms: true
+  evidence: >-
+    SOC 2 Type II listed on trust.expertise.ai and on the security page
+    ("Independent assessment of the design and operating effectiveness of our
+    controls"); attainment announced in the changelog dated 2025-07-29.
+- id: soc2-type-1
+  conforms: true
+  evidence: SOC 2 Type 1 listed on trust.expertise.ai.
+- id: soc3
+  conforms: true
+  evidence: >-
+    SOC 3 public assurance report listed on trust.expertise.ai and described on
+    the security page as covering security, availability and confidentiality.
+- id: gdpr
+  conforms: true
+  evidence: >-
+    GDPR alignment stated on https://www.expertise.ai/security; a Data
+    Processing Agreement and a subprocessor list are published via the trust
+    center.
+- id: ccpa
+  conforms: true
+  evidence: CCPA alignment stated on https://www.expertise.ai/security.
+- id: owasp-top-10
+  conforms: true
+  evidence: >-
+    trust.expertise.ai lists alignment with the OWASP Top 10 among its security
+    controls.
+- id: penetration-test
+  conforms: true
+  evidence: >-
+    Independent third-party penetration test with remediation tracking, listed
+    on the security page and available as a report through the trust center.
+- id: iso-27001
+  conforms: false
+  evidence: Not claimed anywhere on the trust center or security page.
+- id: hipaa
+  conforms: false
+  evidence: Not claimed.
+- id: pci-dss
+  conforms: false
+  evidence: Not claimed.
+- id: fedramp
+  conforms: false
+  evidence: Not claimed.
+- id: mcp-streamable-http
+  conforms: true
+  evidence: >-
+    https://api.expertise.ai/mcp implements the MCP Streamable HTTP transport —
+    GET returns 405 with {"error":"SSE stream not supported"} and POST returns
+    well-formed JSON-RPC 2.0. Probed 2026-08-13.
+- id: jsonrpc-2.0
+  conforms: true
+  evidence: >-
+    MCP endpoint returns {"jsonrpc":"2.0","id":null,"error":{"code":-32001,
+    "message":"Unauthorized"}}.
+- id: oauth2
+  conforms: false
+  evidence: >-
+    Explicitly refused. GET /.well-known/oauth-authorization-server and
+    /.well-known/oauth-protected-resource on api.expertise.ai return HTTP 404
+    with {"error":"oauth_not_supported"}. The API authenticates with an
+    X-API-KEY header instead.
+- id: rfc8414-oauth-server-metadata
+  conforms: false
+  evidence: Route implemented but answers oauth_not_supported.
+- id: rfc9728-protected-resource-metadata
+  conforms: false
+  evidence: Route implemented but answers oauth_not_supported.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 on every host.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    No application/problem+json anywhere; anonymous requests to the documented
+    REST paths return the default Flask HTML 404 body.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: >-
+    /.well-known/security.txt returns 404 on www.expertise.ai, api.expertise.ai,
+    docs.expertise.ai and chatsimple.ai (and a SPA shell on app./my.expertise.ai).
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No deprecation policy and no Sunset header documented or observed.
+- id: openapi
+  conforms: false
+  evidence: >-
+    No OpenAPI/Swagger document found on any host after probing the API host
+    root, the docs host and the console host — see x-coverage in apis.yml.
+- id: asyncapi
+  conforms: false
+  evidence: No AsyncAPI document published; see asyncapi/chatsimple-webhooks.yml.
+- id: a2a-agent-card
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json return 404 on the
+    real hosts and an HTML app shell on the two SPA hosts. No card exists.
+- id: llms-txt
+  conforms: false
+  evidence: >-
+    docs.expertise.ai renders an in-page banner that says "Fetch the complete
+    documentation index at: /llms.txt" and links it in the DOM, but
+    https://docs.expertise.ai/llms.txt returns HTTP 404 — the file is advertised
+    and not served. The Mintlify markdown twins (/index.md, /live/overview.md)
+    are linked in the same way and also 404.
+- id: hsts
+  conforms: true
+  evidence: >-
+    strict-transport-security: max-age=31536000; includeSubDomains on
+    api.expertise.ai; max-age=63072000 on www.expertise.ai and my.expertise.ai.
+- id: caa
+  conforms: true
+  evidence: >-
+    expertise.ai publishes CAA records for pki.goog, sectigo.com, amazon.com and
+    letsencrypt.org.
+- id: dnssec
+  conforms: false
+  evidence: expertise.ai is not DNSSEC-signed.
+- id: dmarc
+  conforms: true
+  evidence: DMARC published with policy quarantine.
+x-evidence:
+- fetched: '2026-08-13'
+  url: https://trust.expertise.ai/
+  http_status: 200
+- fetched: '2026-08-13'
+  url: https://www.expertise.ai/security
+  http_status: 200
+- fetched: '2026-08-13'
+  url: https://docs.expertise.ai/llms.txt
+  http_status: 404
+- fetched: '2026-08-13'
+  url: https://api.expertise.ai/mcp
+  http_status: 401
