@@ -39,6 +39,17 @@ tags:
 - Company
 - AI Agents
 - Conversational AI
+- Chatbots
+- Lead Generation
+- Sales Automation
+- CRM Integration
+- Voice AI
+- Go-To-Market
+- Customer Engagement
+tags_raw:
+- Company
+- AI Agents
+- Conversational AI
 - Chatbot
 - Lead Generation
 - Sales Automation
@@ -65,6 +76,11 @@ apis:
   humanURL: https://docs.expertise.ai/live/integrations/zapier
   baseURL: https://api.expertise.ai/v0/users
   tags:
+  - Lead Generation
+  - Webhook
+  - Automation
+  - Chatbots
+  tags_raw:
   - Lead Generation
   - Webhooks
   - Automation
