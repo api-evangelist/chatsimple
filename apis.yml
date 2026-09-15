@@ -1,17 +1,14 @@
 aid: chatsimple
 name: Chatsimple
-description: >-
-  Chatsimple (now operating as Expertise AI, expertise.ai) is an AI agent
-  platform for revenue and go-to-market teams. It builds no-code conversational
-  AI sales agents and chatbots that engage website visitors, qualify and capture
-  leads, book meetings, and answer questions from a trained knowledge base, plus
-  a Voice AI assistant and an "Expertise Assistant" library of 100+ pre-built
-  GTM plays that automate prospecting, pipeline management, and outreach. The
-  platform embeds on any website, integrates with CRM and communication tools
-  such as HubSpot, Salesforce, Slack, Zapier, Marketo, and LeanData, and offers
-  API access on its Enterprise tier. It is SOC 2 Type II, SOC 3, GDPR, and CCPA
-  aligned with a public trust center. Originally launched as chatsimple.ai, the
-  company rebranded to Expertise AI; chatsimple.ai now redirects to expertise.ai.
+description: Chatsimple (now operating as Expertise AI, expertise.ai) is an AI agent platform for revenue
+  and go-to-market teams. It builds no-code conversational AI sales agents and chatbots that engage website
+  visitors, qualify and capture leads, book meetings, and answer questions from a trained knowledge base,
+  plus a Voice AI assistant and an "Expertise Assistant" library of 100+ pre-built GTM plays that automate
+  prospecting, pipeline management, and outreach. The platform embeds on any website, integrates with
+  CRM and communication tools such as HubSpot, Salesforce, Slack, Zapier, Marketo, and LeanData, and offers
+  API access on its Enterprise tier. It is SOC 2 Type II, SOC 3, GDPR, and CCPA aligned with a public
+  trust center. Originally launched as chatsimple.ai, the company rebranded to Expertise AI; chatsimple.ai
+  now redirects to expertise.ai.
 url: https://raw.githubusercontent.com/api-evangelist/chatsimple/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -69,21 +66,16 @@ tags_raw:
 - Go-To-Market
 - Customer Engagement
 apis:
-- aid: chatsimple-zapier-leads-api
+- aid: chatsimple:chatsimple-zapier-leads-api
   name: Expertise AI Zapier / Leads API
-  description: >-
-    The only publicly documented HTTP endpoints Chatsimple (now Expertise AI)
-    publishes. Documented on the Zapier integration page of docs.expertise.ai as
-    four operations under the base URL https://api.expertise.ai/v0/users: a
-    connect/authorize call (GET /zapier), webhook registration (POST
-    /zapier/subscribe with the callback in X-HOOKURL), webhook removal (DELETE
-    /zapier/unsubscribe), and retrieval of the most recent captured lead (GET
-    /zapier/get_leads). Every call carries an X-API-KEY header plus X-USER-ID and
-    X-CHATBOT-ID to scope it to one account and one agent. Lead payloads carry
-    created_on, name, email, phone_number and questions. No OpenAPI is published
-    for it, and on 2026-08-13 every documented path returned HTTP 404 to an
-    anonymous request while the host itself was healthy — recorded as published
-    but unverified.
+  description: 'The only publicly documented HTTP endpoints Chatsimple (now Expertise AI) publishes. Documented
+    on the Zapier integration page of docs.expertise.ai as four operations under the base URL https://api.expertise.ai/v0/users:
+    a connect/authorize call (GET /zapier), webhook registration (POST /zapier/subscribe with the callback
+    in X-HOOKURL), webhook removal (DELETE /zapier/unsubscribe), and retrieval of the most recent captured
+    lead (GET /zapier/get_leads). Every call carries an X-API-KEY header plus X-USER-ID and X-CHATBOT-ID
+    to scope it to one account and one agent. Lead payloads carry created_on, name, email, phone_number
+    and questions. No OpenAPI is published for it, and on 2026-08-13 every documented path returned HTTP
+    404 to an anonymous request while the host itself was healthy — recorded as published but unverified.'
   humanURL: https://docs.expertise.ai/live/integrations/zapier
   baseURL: https://api.expertise.ai/v0/users
   tags:
@@ -105,19 +97,15 @@ apis:
     url: authentication/chatsimple-authentication.yml
   - type: Webhooks
     url: asyncapi/chatsimple-webhooks.yml
-- aid: chatsimple-mcp-server
+- aid: chatsimple:chatsimple-mcp-server
   name: Expertise AI MCP Server
-  description: >-
-    A remote Model Context Protocol server at https://api.expertise.ai/mcp,
-    found by direct probe of the API host root and documented nowhere on the
-    provider's site. It implements the MCP Streamable HTTP transport — a GET
-    returns HTTP 405 with {"error":"SSE stream not supported"} and a POST returns
-    well-formed JSON-RPC 2.0 — but every anonymous call, including tools/list,
-    returns HTTP 401 with JSON-RPC error -32001 Unauthorized, so the live tool
-    manifest and its input schemas are not publicly readable. The server
-    implements the RFC 8414 and RFC 9728 discovery routes and answers both with
-    {"error":"oauth_not_supported"}, so authentication is an API key rather than
-    OAuth. No tool list has been derived or invented.
+  description: A remote Model Context Protocol server at https://api.expertise.ai/mcp, found by direct
+    probe of the API host root and documented nowhere on the provider's site. It implements the MCP Streamable
+    HTTP transport — a GET returns HTTP 405 with {"error":"SSE stream not supported"} and a POST returns
+    well-formed JSON-RPC 2.0 — but every anonymous call, including tools/list, returns HTTP 401 with JSON-RPC
+    error -32001 Unauthorized, so the live tool manifest and its input schemas are not publicly readable.
+    The server implements the RFC 8414 and RFC 9728 discovery routes and answers both with {"error":"oauth_not_supported"},
+    so authentication is an API key rather than OAuth. No tool list has been derived or invented.
   humanURL: https://api.expertise.ai/mcp
   baseURL: https://api.expertise.ai/mcp
   tags:
@@ -198,7 +186,6 @@ x-enrichment:
   status: enriched
   artifacts_added: 12
   pass: local-v1
-  note: >-
-    Round 2. Contract discovery on the API host root found a real remote MCP
-    server (auth-gated) and a real four-endpoint REST reference on the Zapier
-    docs page; no OpenAPI, no AsyncAPI, no agent card, no security.txt.
+  note: Round 2. Contract discovery on the API host root found a real remote MCP server (auth-gated) and
+    a real four-endpoint REST reference on the Zapier docs page; no OpenAPI, no AsyncAPI, no agent card,
+    no security.txt.
